@@ -4,7 +4,7 @@ function renderBlogCards($blogs) {
 
     foreach ($blogs as $blog) {
         $html .= '
-        <div class="card">
+        <div class="card" onclick="window.location.href=\'blog-detail.php?id=' . htmlspecialchars($blog['blog_id'], ENT_QUOTES, 'UTF-8') . '\'">
             <div class="banner">
                 <img src="' . htmlspecialchars($blog['thumbnail_url'], ENT_QUOTES, 'UTF-8') . '" alt="Banner Image">
             </div>
@@ -14,7 +14,6 @@ function renderBlogCards($blogs) {
                     <p class="author"><span class="name">' . htmlspecialchars($blog['first_name'], ENT_QUOTES, 'UTF-8') . '</span> / <span class="date">' . date('M d, Y', strtotime($blog['created_at'])) . '</span></p>
                 </div>
                 <h2>' . htmlspecialchars($blog['title'], ENT_QUOTES, 'UTF-8') . '</h2>
-                <p class="subheading">' . htmlspecialchars($blog['content'], ENT_QUOTES, 'UTF-8') . '</p>
             </div>
         </div>';
     }
@@ -28,6 +27,7 @@ function renderBlogCards($blogs) {
             margin-right: 50px;
             margin-top: 40px;
             display: flex;
+            justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
         }
@@ -41,6 +41,7 @@ function renderBlogCards($blogs) {
 
         .card {
             width: 20%;
+            height: 280px;
             background: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 12px;

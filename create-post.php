@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':content' => $content,
             ':thumbnail_url' => $thumbnail_url
         ]);
-        echo "Post created successfully!";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
