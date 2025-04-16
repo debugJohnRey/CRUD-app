@@ -73,5 +73,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ?>
   
   <script src="js/scripts.js"></script>
+  <script>
+    document.getElementById('createPostForm').addEventListener('submit', function(e) {
+      const title = document.getElementById('autoResizeTextareaTitle').value.trim();
+      const content = document.getElementById('autoResizeTextareaContent').value.trim();
+      
+      if (!title || !content) {
+        e.preventDefault();
+        alert('You can\'t publish an empty blog.');
+        return false;
+      }
+    });
+  </script>
 </body>
 </html>

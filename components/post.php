@@ -19,7 +19,6 @@ function renderCreatePost() {
   width: 60%;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
   border: none;
 }
 

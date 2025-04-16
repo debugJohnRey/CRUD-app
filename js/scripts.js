@@ -1,22 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM Content Loaded");
-  
+
   const dropImg = document.querySelector(".drop-img");
   const dropdownContent = document.querySelector(".dropdown-content");
 
-  console.log("Dropdown elements:", { 
-    dropImg: dropImg, 
-    dropdownContent: dropdownContent 
+  console.log("Dropdown elements:", {
+    dropImg: dropImg,
+    dropdownContent: dropdownContent,
   });
 
   if (dropImg && dropdownContent) {
     console.log("Dropdown elements found, adding event listeners");
-    
+
     dropImg.addEventListener("click", (e) => {
       console.log("Dropdown clicked");
       e.stopPropagation();
       dropdownContent.classList.toggle("show");
-      console.log("Dropdown visibility:", dropdownContent.classList.contains("show"));
+      console.log(
+        "Dropdown visibility:",
+        dropdownContent.classList.contains("show")
+      );
     });
 
     window.addEventListener("click", () => {
@@ -50,7 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const addThumbnailButton = document.getElementById("addThumbnailButton");
   const fileInput = document.getElementById("fileInput");
   const thumbnail = document.getElementById("thumbnail");
-  const removeThumbnailButton = document.getElementById("removeThumbnailButton");
+  const removeThumbnailButton = document.getElementById(
+    "removeThumbnailButton"
+  );
 
   if (addThumbnailButton && fileInput && thumbnail && removeThumbnailButton) {
     addThumbnailButton.addEventListener("click", () => {
@@ -80,4 +85,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
