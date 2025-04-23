@@ -9,9 +9,9 @@ function renderNavbar($label, $icon, $showPublishButton) {
                     <ul>
                         <button type="submit" form="createPostForm" onclick="navigateToPage(\'dashboard.php\')" class="create-post-btn"><i class="' . htmlspecialchars($icon). '"></i>' . htmlspecialchars($label) . '</button>
                         <li class="dropdown">
-                            <img class="drop-img" src="assets/pogi.jpg" alt="">
+                            <img class="drop-img" src="assets/user.png" alt="">
                             <div class="dropdown-content">
-                                <a href="profile.php"><i class="fa-regular fa-user"></i>Profile</a>
+                                <a href="profile-page.php"><i class="fa-regular fa-user"></i>Profile</a>
                                 <a href="my-blog.php"><i class="fa-solid fa-book"></i>My Blogs</a>
                                 <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                             </div>
@@ -28,9 +28,9 @@ function renderNavbar($label, $icon, $showPublishButton) {
                     <ul>
                         <button onclick="navigateToPage(\'create-post.php\')" class="create-post-btn"><i class="' . htmlspecialchars($icon). '"></i>' . htmlspecialchars($label) . '</button>
                         <li class="dropdown">
-                            <img class="drop-img" src="assets/pogi.jpg" alt="">
+                            <img class="drop-img" src="assets/user.png" alt="">
                             <div class="dropdown-content">
-                                <a href="profile.php"><i class="fa-regular fa-user"></i>Profile</a>
+                                <a href="profile-page.php"><i class="fa-regular fa-user"></i>Profile</a>
                                 <a href="my-blog.php"><i class="fa-solid fa-book"></i>My Blogs</a>
                                 <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                             </div>

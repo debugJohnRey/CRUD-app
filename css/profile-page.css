@@ -1,0 +1,87 @@
+* {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.left-nav a {
+  color: rgb(76, 147, 175);
+  text-decoration: none;
+  font-family: "Sigmar", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+
+.profile-container {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+}
+
+.profile-picture {
+  text-align: center;
+}
+.profile-picture-img {
+  width: 50%;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  flex-grow: 1;
+}
+
+.edit-profile-button {
+  background-color: rgb(76, 147, 175);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-profile-button:hover {
+  background-color: rgb(64, 121, 143);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.delete-account-button {
+  background-color: #d16363;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-account-button:hover {
+  background-color: #9c4c4c;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.profile-info-details {
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.profile-buttons-container {
+  margin-top: 20px;
+}
+
