@@ -3,6 +3,9 @@ function renderBlogCards($blogs) {
     $html = '<div class="blog-container">';
 
     foreach ($blogs as $blog) {
+        // Set default profile picture if none exists
+        $profilePicture = !empty($blog['profile_picture_url']) ? $blog['profile_picture_url'] : 'assets/user.png';
+        
         $html .= '
         <div class="card" onclick="window.location.href=\'blog-detail.php?id=' . htmlspecialchars($blog['blog_id'], ENT_QUOTES, 'UTF-8') . '\'">
             <div class="banner">
@@ -10,7 +13,7 @@ function renderBlogCards($blogs) {
             </div>
             <div class="content">
                 <div class="author-section">
-                    <img class="avatar" src="' . htmlspecialchars($blog['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '" alt="Avatar">
+                    <img class="avatar" src="' . htmlspecialchars($profilePicture, ENT_QUOTES, 'UTF-8') . '" alt="Avatar">
                     <p class="author"><span class="name">' . htmlspecialchars($blog['first_name'], ENT_QUOTES, 'UTF-8') . '</span> / <span class="date">' . date('M d, Y', strtotime($blog['created_at'])) . '</span></p>
                 </div>
                 <h2>' . htmlspecialchars($blog['title'], ENT_QUOTES, 'UTF-8') . '</h2>
@@ -91,7 +94,7 @@ function renderBlogCards($blogs) {
         }
 
         .content .author-section p.author span.name {
-            color: #1A73E8;
+            color: rgb(76, 147, 175);
             font-weight: 600;
         }
 

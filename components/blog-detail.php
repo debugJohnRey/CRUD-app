@@ -1,5 +1,7 @@
 <?php
 function renderBlogDetail($blog) {
+    $profilePicture = !empty($blog['profile_picture_url']) ? $blog['profile_picture_url'] : 'assets/user.png';
+
     return '
     <div class="blog-detail-container">
         <article class="blog-header">
@@ -8,7 +10,7 @@ function renderBlogDetail($blog) {
             ' : '') . '
             
             <div class="blog-meta">
-                <img class="author-avatar" src="' . htmlspecialchars($blog['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '" alt="Author avatar">
+                <img class="author-avatar" src="' . htmlspecialchars($profilePicture, ENT_QUOTES, 'UTF-8') . '" alt="Author avatar">
                 <div class="author-info">
                     <span class="author-name">' . htmlspecialchars($blog['first_name'], ENT_QUOTES, 'UTF-8') . '</span>
                     <span class="blog-date">' . date('M d, Y', strtotime($blog['created_at'])) . '</span>
@@ -60,7 +62,7 @@ function renderBlogDetail($blog) {
         }
 
         .author-name {
-            color: #1A73E8;
+            color: rgb(76, 147, 175);
             font-weight: 600;
         }
 
