@@ -44,6 +44,22 @@ header {
   flex-grow: 1;
 }
 
+
+
+.profile-info-details, 
+.profile-info-details-date {
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+
+
+.profile-info-details-date {
+  border: none;
+}
+
 .edit-profile-button {
   background-color: rgb(76, 147, 175);
   color: #fff;
@@ -72,13 +88,6 @@ header {
 .delete-account-button:hover {
   background-color: #9c4c4c;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.profile-info-details {
-  padding: 10px;
-  border: 1px solid #ccc;
-  font-size: 18px;
-  border-radius: 5px;
 }
 
 .profile-buttons-container {
