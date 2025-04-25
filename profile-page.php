@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>My Profile</title>
-    <link rel="stylesheet" href="css/profile-page.css">
-    <link rel="icon" href="assets/logo.png" type="image/png">
-</head>
-<body>
 <?php
     // Start session if not already started
     session_start();
@@ -47,10 +32,26 @@
         }
     } else {
         // Redirect to login page if not logged in
-        header("Location: login.php");
+        header("Location: index.php");
         exit();
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>My Profile</title>
+    <link rel="stylesheet" href="css/profile-page.css">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body>
+
 <header>
   <div class="left-nav"><a href="dashboard.php">Blogz</a></div>
 </header>
@@ -69,10 +70,39 @@
       <input type="text" class="profile-info-details" value="<?php echo htmlspecialchars($date_joined); ?>" readonly>
 
       <div class="profile-buttons-container">
-        <button class="edit-profile-button">Edit Profile</button>
+        <button class="edit-profile-button" id="editProfileBtn">Edit Profile</button>
         <button class="delete-account-button">Delete Account</button>
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const editProfileBtn = document.getElementById('editProfileBtn');
+      const inputFields = document.querySelectorAll('.profile-info-details');
+      let isEditing = false;
+      
+      editProfileBtn.addEventListener('click', function() {
+        isEditing = !isEditing;
+        
+        if (isEditing) {
+          // Enable editing
+          inputFields.forEach(input => {
+            input.removeAttribute('readonly');
+          });
+          editProfileBtn.textContent = 'Save Profile';
+        } else {
+          // Save changes and disable editing
+          inputFields.forEach(input => {
+            input.setAttribute('readonly', true);
+          });
+          editProfileBtn.textContent = 'Edit Profile';
+          
+          // Here you would typically add code to save the changes to the database
+          // For example: submitProfileChanges();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
