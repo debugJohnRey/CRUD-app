@@ -44,8 +44,6 @@ header {
   flex-grow: 1;
 }
 
-
-
 .profile-info-details, 
 .profile-info-details-date {
   padding: 10px;
@@ -54,7 +52,9 @@ header {
   border-radius: 5px;
 }
 
-
+.change-password-input {
+  margin-bottom: 10px;
+}
 
 .profile-info-details-date {
   border: none;
@@ -94,3 +94,46 @@ header {
   margin-top: 20px;
 }
 
+.modal {
+  display:none; 
+  position:fixed; 
+  top: 50%;                   
+  left: 50%;                  
+  transform: translate(-50%, -50%);
+  width: 50%;                 
+  max-width: 265px;           
+  height: auto;               
+  max-height: 90vh;           
+  background:white; 
+  padding:20px; 
+  border:1px solid #ccc; 
+  border-radius: 8px;         
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+  z-index:1000;
+  overflow:auto;
+}
+
+.change-password-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.save-password-btn {
+  background-color: rgb(76, 147, 175);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn {
+  background-color: #d16363;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

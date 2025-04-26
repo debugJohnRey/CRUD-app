@@ -72,28 +72,13 @@
         <button class="edit-profile-button" id="editProfileBtn" name="update">Edit Profile</button>
         <button class="delete-account-button">Delete Account</button>
 
-        <div id="myModal" style="display:none; 
-                        position:fixed; 
-                        top: 50%;                   /* Center vertically */
-                        left: 50%;                  /* Center horizontally */
-                        transform: translate(-50%, -50%);  /* Adjust for exact center */
-                        width: 50%;                 /* 50% of viewport width */
-                        max-width: 600px;           /* Maximum width */
-                        height: auto;               /* Height adjusts to content */
-                        max-height: 80vh;           /* Maximum height */
-                        background:white; 
-                        padding:20px; 
-                        border:1px solid #ccc; 
-                        border-radius: 8px;         /* Rounded corners */
-                        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Shadow effect */
-                        z-index:1000;
-                        overflow:auto;">
-          <p>This is a custom popup!</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, eligendi esse architecto ipsa natus adipisci ea temporibus dolore, vel accusantium voluptatibus obcaecati ipsam delectus voluptate et dicta nesciunt cupiditate quidem?
-          </p>
-          <button onclick="closeModal()">Save Password</button>
-          <button onclick="closeModal()">Close</button>
+        <div id="myModal" class="modal">
+          <p>Enter your new password.</p>
+          <input type="text" class="change-password-input" maxlength="12">
+          <div style="margin-top: 10px;">
+            <button onclick="" class="save-password-btn">Save</button>
+            <button onclick="closeModal()" class="close-btn">Close</button>
+          </div>
         </div>
       </div>
     </div>
@@ -132,6 +117,10 @@
     }
 
     function closeModal() {
+      const passwordInput = document.querySelector('.change-password-input');
+      if (passwordInput) {
+        passwordInput.value = '';
+      }
       document.getElementById("myModal").style.display = "none";
     }
   </script>
