@@ -5,8 +5,8 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+require_once 'conn/db.php'; // Add this to define $pdo globally
 include 'conn/fetch_blog.php';
-
 $blogs = fetchBlogs();
 ?>
 
@@ -26,7 +26,7 @@ $blogs = fetchBlogs();
   <title>Blogz</title>
 </head>
 <body>
-  <?php 
+<?php 
     include 'components/navbar.php';
     include 'components/blogs.php';
 

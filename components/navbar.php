@@ -1,5 +1,30 @@
 <?php
 function renderNavbar($label, $icon, $showPublishButton) {
+    // Get the user's profile picture from the session or database
+    require_once __DIR__ . '/../conn/db.php';
+    global $pdo; // Make $pdo available in this function
+    
+    // Check if $pdo is null and handle it gracefully
+    if (!isset($pdo) || $pdo === null) {
+        // If $pdo is not available, use default image and continue
+        $profilePicture = 'assets/user.png';
+    } else {
+        $user_id = $_SESSION['user_id'];
+        $profilePicture = 'assets/user.png'; // Default image
+        
+        try {
+            $stmt = $pdo->prepare("SELECT profile_picture_url FROM users WHERE user_id = ?");
+            $stmt->execute([$user_id]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($user && !empty($user['profile_picture_url'])) {
+                $profilePicture = $user['profile_picture_url'];
+            }
+        } catch (PDOException $e) {
+            // If there's an error, use the default image
+        }
+    }
+    
     $publishButton = '';
     if ($showPublishButton) {
         $publishButton = '
@@ -9,7 +34,7 @@ function renderNavbar($label, $icon, $showPublishButton) {
                     <ul>
                         <button type="submit" form="createPostForm" onclick="navigateToPage(\'dashboard.php\')" class="create-post-btn"><i class="' . htmlspecialchars($icon). '"></i>' . htmlspecialchars($label) . '</button>
                         <li class="dropdown">
-                            <img class="drop-img" src="assets/user.png" alt="">
+                            <img class="drop-img" src="' . htmlspecialchars($profilePicture) . '" alt="Profile">
                             <div class="dropdown-content">
                                 <a href="profile-page.php"><i class="fa-regular fa-user"></i>Profile</a>
                                 <a href="my-blog.php"><i class="fa-solid fa-book"></i>My Blogs</a>
@@ -28,7 +53,7 @@ function renderNavbar($label, $icon, $showPublishButton) {
                     <ul>
                         <button onclick="navigateToPage(\'create-post.php\')" class="create-post-btn"><i class="' . htmlspecialchars($icon). '"></i>' . htmlspecialchars($label) . '</button>
                         <li class="dropdown">
-                            <img class="drop-img" src="assets/user.png" alt="">
+                            <img class="drop-img" src="' . htmlspecialchars($profilePicture) . '" alt="Profile">
                             <div class="dropdown-content">
                                 <a href="profile-page.php"><i class="fa-regular fa-user"></i>Profile</a>
                                 <a href="my-blog.php"><i class="fa-solid fa-book"></i>My Blogs</a>
@@ -103,10 +128,12 @@ function renderNavbar($label, $icon, $showPublishButton) {
             }
 
             .drop-img {
-                width: 40px;
+                width: 40px; 
+                height: 40px;
                 border-radius: 50%;
                 margin-left: 10px;
                 transition: filter 0.3s;
+                object-fit: cover; 
             }
 
             .dropdown:hover .drop-img {
