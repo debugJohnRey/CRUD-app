@@ -18,19 +18,48 @@ document.addEventListener("DOMContentLoaded", () => {
   const titleTextarea = document.getElementById("autoResizeTextareaTitle");
   const contentTextarea = document.getElementById("autoResizeTextareaContent");
 
+  // Improved auto-resize function with debouncing
   const autoResize = (textarea) => {
-    textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + "px";
+    if (!textarea) return;
+    
+    // Save the current scroll position
+    const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Reset height to auto before calculating the new height
+    textarea.style.height = 'auto';
+    
+    // Set the height based on scrollHeight with a small buffer
+    textarea.style.height = (textarea.scrollHeight + 2) + 'px';
+    
+    // Restore the scroll position
+    window.scrollTo(0, scrollPos);
   };
 
+  // Initialize heights on page load
   if (titleTextarea) {
-    titleTextarea.addEventListener("input", function () {
+    // Set initial height
+    autoResize(titleTextarea);
+    
+    // Add event listeners for various events that might change content
+    titleTextarea.addEventListener("input", function() {
+      autoResize(this);
+    });
+    
+    titleTextarea.addEventListener("focus", function() {
       autoResize(this);
     });
   }
 
   if (contentTextarea) {
-    contentTextarea.addEventListener("input", function () {
+    // Set initial height
+    autoResize(contentTextarea);
+    
+    // Add event listeners for various events that might change content
+    contentTextarea.addEventListener("input", function() {
+      autoResize(this);
+    });
+    
+    contentTextarea.addEventListener("focus", function() {
       autoResize(this);
     });
   }

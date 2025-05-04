@@ -65,25 +65,24 @@ function renderCreatePost() {
   background-color: rgb(64, 121, 143);
 }
 
-/* Textarea base styles */
 textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
   border: none;
   box-sizing: border-box;
-  resize: none;        /* Prevents manual resizing */
-  overflow: hidden;    /* Hides scrollbars for auto-resize support */
+  resize: none;        
+  overflow: hidden;    
   margin-bottom: 10px;
   border-radius: 5px;
+  line-height: 1.5;    
+  transition: height 0.1s ease; 
 }
 
-/* Remove outline when textarea is active (focused) */
 textarea:focus {
   outline: none;
 }
 
-/* Specific textarea heights */
 #autoResizeTextareaTitle {
   min-height: 50px;
 }

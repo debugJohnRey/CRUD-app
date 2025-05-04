@@ -21,7 +21,7 @@ function renderAuth($link, $type, $question, $direction = "", $greeting = "", $i
                 {$error_html}
                 <h1>Blogz</h1>
                 <h3>{$greeting}</h3>
-                <form method='POST' action=''>
+                <form method='POST'>
                     {$firstNameInput}
                     <p>Email</p>
                     <input type='email' name='email' required>

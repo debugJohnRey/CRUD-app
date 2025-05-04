@@ -1,16 +1,13 @@
 <?php
-    // Start session if not already started
     session_start();
     
-    // Include database connection
     include 'conn/db.php';
     
-    // Initialize variables
     $username = "";
     $password = "";
     $date_joined = "";
     $email = "";
-    $profile_picture = "assets/user.png"; // Default profile picture
+    $profile_picture = "assets/user.png";
     
     // Check if user is logged in
     if (isset($_SESSION['user_id'])) {
@@ -86,7 +83,7 @@
 
         <div id="myModal" class="modal">
           <p>Enter your new password.</p>
-          <input type="text" class="change-password-input" maxlength="12">
+          <input type="password" class="change-password-input" maxlength="12" autocomplete="new-password">
           <div style="margin-top: 10px;">
             <button onclick="savePassword()" class="save-password-btn">Save</button>
             <button onclick="closeModal()" class="close-btn">Close</button>
@@ -133,15 +130,6 @@
           // Show profile picture overlay when in edit mode
           profilePictureOverlay.classList.add('active');
         } else {
-          // Save changes and disable editing
-          inputFields.forEach(input => {
-            input.setAttribute('readonly', true);
-          });
-          editProfileBtn.textContent = 'Edit Profile';
-          
-          // Hide profile picture overlay when not in edit mode
-          profilePictureOverlay.classList.remove('active');
-          
           // Get updated values
           const username = document.querySelector('.profile-info-details[value^="<?php echo htmlspecialchars($username); ?>"]').value;
           const email = document.querySelector('.profile-info-details[value^="<?php echo htmlspecialchars($email); ?>"]').value;
@@ -157,6 +145,10 @@
             formData.append('profile_picture', selectedFile);
           }
           
+          // Show loading state or disable button while saving
+          editProfileBtn.textContent = 'Saving...';
+          editProfileBtn.disabled = true;
+          
           fetch('conn/update-profile.php', {
             method: 'POST',
             body: formData
@@ -168,13 +160,26 @@
               // Refresh the page to show updated data
               location.reload();
             } else {
+              // If there's an error, keep fields editable
               alert('Error: ' + data.message);
+              editProfileBtn.textContent = 'Save Profile';
+              editProfileBtn.disabled = false;
+              isEditing = true; // Keep in edit mode
             }
           })
           .catch(error => {
             console.error('Error:', error);
             alert('An error occurred while updating your profile.');
+            // If there's an error, keep fields editable
+            editProfileBtn.textContent = 'Save Profile';
+            editProfileBtn.disabled = false;
+            isEditing = true; // Keep in edit mode
           });
+          
+          // Only disable editing if the save is successful
+          
+          // Hide profile picture overlay
+          profilePictureOverlay.classList.remove('active');
         }
       });
       
