@@ -7,15 +7,58 @@ function editDeleteBlogs($blogs) {
       $profilePicture = !empty($blog['profile_picture_url']) ? $blog['profile_picture_url'] : 'assets/user.png';
       
       $html .= '
-      <div class="card" onclick="window.location.href=\'blog-detail.php?id=' . htmlspecialchars($blog['blog_id'], ENT_QUOTES, 'UTF-8') . '\'">
-          <div class="content">
+      <div class="card">
+          <div class="content" onclick="window.location.href=\'blog-detail.php?id=' . htmlspecialchars($blog['blog_id'], ENT_QUOTES, 'UTF-8') . '\'">
               <div class="author-section">
                   <img class="avatar" src="' . htmlspecialchars($profilePicture, ENT_QUOTES, 'UTF-8') . '" alt="Avatar">
                   <p class="author"><span class="name">' . htmlspecialchars($blog['first_name'], ENT_QUOTES, 'UTF-8') . '</span> / <span class="date">' . date('M d, Y', strtotime($blog['created_at'])) . '</span></p>
               </div>
               <h2>' . htmlspecialchars($blog['title'], ENT_QUOTES, 'UTF-8') . '</h2>
           </div>
-      </div>';
+          <div class="action-buttons">
+              <button class="edit-btn" onclick="event.stopPropagation(); window.location.href=\'edit-blog.php?id=' . htmlspecialchars($blog['blog_id'], ENT_QUOTES, 'UTF-8') . '\'">
+                  <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="delete-btn" onclick="event.stopPropagation(); if(confirm(\'Are you sure you want to delete this blog?\')) window.location.href=\'delete-blog.php?id=' . htmlspecialchars($blog['blog_id'], ENT_QUOTES, 'UTF-8') . '\'">
+                  <i class="fas fa-trash"></i> Delete
+              </button>
+          </div>
+      </div>
+      <style>
+          .action-buttons {
+              position: absolute;
+              right: 20px;
+              top: 50%;
+              transform: translateY(-50%);
+              display: flex;
+              gap: 10px;
+          }
+          
+          .edit-btn, .delete-btn {
+              padding: 5px 10px;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 12px;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+          }
+          
+          .edit-btn {
+              background-color: #4993af;
+              color: white;
+          }
+          
+          .delete-btn {
+              background-color: #dc3545;
+              color: white;
+          }
+          
+          .card {
+              position: relative;
+          }
+      </style>';
   }
 
   $html .= '</div>';
