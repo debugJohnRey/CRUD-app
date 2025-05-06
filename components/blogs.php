@@ -63,7 +63,7 @@ function renderBlogCards($blogs) {
             object-fit: cover;
             display: block;
             transition: opacity 0.3s ease; 
-            border-radius: 12px;
+            border-radius: 12px 12px 0 0;
         }
 
         .card:hover .banner img {

@@ -37,7 +37,7 @@ function renderNavbar($label, $icon, $showPublishButton) {
                             <img class="drop-img" src="' . htmlspecialchars($profilePicture) . '" alt="Profile">
                             <div class="dropdown-content">
                                 <a href="profile-page.php"><i class="fa-regular fa-user"></i>Profile</a>
-                                <a href="my-blog.php"><i class="fa-solid fa-book"></i>My Blogs</a>
+                                <a href="my-blogs-page.php"><i class="fa-solid fa-book"></i>My Blogs</a>
                                 <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                             </div>
                         </li>
@@ -56,7 +56,7 @@ function renderNavbar($label, $icon, $showPublishButton) {
                             <img class="drop-img" src="' . htmlspecialchars($profilePicture) . '" alt="Profile">
                             <div class="dropdown-content">
                                 <a href="profile-page.php"><i class="fa-regular fa-user"></i>Profile</a>
-                                <a href="my-blog.php"><i class="fa-solid fa-book"></i>My Blogs</a>
+                                <a href="my-blogs-page.php"><i class="fa-solid fa-book"></i>My Blogs</a>
                                 <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                             </div>
                         </li>
@@ -102,6 +102,7 @@ function renderNavbar($label, $icon, $showPublishButton) {
             }
 
             .create-post-btn {
+                font-family: "Inter", sans-serif;
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
