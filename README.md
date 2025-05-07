@@ -10,7 +10,6 @@
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
@@ -193,12 +192,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
 © 2023 Blogz. All rights reserved.
-
-        Too many current requests. Your queue position is 1. Please wait for a while or switch to other models for a smoother experience.
