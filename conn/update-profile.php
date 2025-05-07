@@ -1,8 +1,7 @@
 <?php
-// Start session if not already started
 session_start();
 
-// Include database connection
+//database connection
 include 'db.php';
 
 // Check if user is logged in
@@ -118,11 +117,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 // Handle account deletion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_account') {
     try {
+        // First, get the user's profile picture URL
+        $stmt = $pdo->prepare("SELECT profile_picture_url FROM users WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $profile_picture_url = $user['profile_picture_url'] ?? '';
+        
+        // Get all blog thumbnails associated with this user
+        $stmt = $pdo->prepare("SELECT thumbnail_url FROM blogs WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+        $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $thumbnail_urls = array_column($blogs, 'thumbnail_url');
+        
+        // Delete all blogs associated with this user
+        $stmt = $pdo->prepare("DELETE FROM blogs WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+        
         // Delete user from database
         $stmt = $pdo->prepare("DELETE FROM users WHERE user_id = ?");
         $result = $stmt->execute([$user_id]);
         
         if ($result) {
+            // Delete the profile picture file if it exists and is not the default image
+            if (!empty($profile_picture_url) && $profile_picture_url !== 'assets/user.png') {
+                $full_profile_path = $_SERVER['DOCUMENT_ROOT'] . '/CRUD-app/' . $profile_picture_url;
+                if (file_exists($full_profile_path)) {
+                    unlink($full_profile_path);
+                }
+            }
+            
+            // Delete all thumbnail files
+            foreach ($thumbnail_urls as $thumbnail_url) {
+                if (!empty($thumbnail_url)) {
+                    $full_thumbnail_path = $_SERVER['DOCUMENT_ROOT'] . '/CRUD-app/' . $thumbnail_url;
+                    if (file_exists($full_thumbnail_path)) {
+                        unlink($full_thumbnail_path);
+                    }
+                }
+            }
+            
             // Destroy session
             session_unset();
             session_destroy();

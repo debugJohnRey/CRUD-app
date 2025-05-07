@@ -17,8 +17,8 @@ if (!$blog_id) {
 }
 
 try {
-    // First, check if the blog belongs to the current user
-    $stmt = $pdo->prepare("SELECT user_id FROM blogs WHERE blog_id = ?");
+    // First, check if the blog belongs to the current user and get the thumbnail URL
+    $stmt = $pdo->prepare("SELECT user_id, thumbnail_url FROM blogs WHERE blog_id = ?");
     $stmt->execute([$blog_id]);
     $blog = $stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -28,9 +28,21 @@ try {
         exit();
     }
     
+    // Store the thumbnail URL for deletion after the blog is removed
+    $thumbnail_url = $blog['thumbnail_url'] ?? '';
+    
     // If we get here, the blog exists and belongs to the current user, so delete it
     $stmt = $pdo->prepare("DELETE FROM blogs WHERE blog_id = ? AND user_id = ?");
-    $stmt->execute([$blog_id, $user_id]);
+    $result = $stmt->execute([$blog_id, $user_id]);
+    
+    // If blog was successfully deleted, delete the thumbnail file if it exists
+    // and is not the default thumbnail
+    if ($result && !empty($thumbnail_url) && $thumbnail_url !== 'assets/thumbnail.png') {
+        $full_thumbnail_path = $_SERVER['DOCUMENT_ROOT'] . '/CRUD-app/' . $thumbnail_url;
+        if (file_exists($full_thumbnail_path)) {
+            unlink($full_thumbnail_path);
+        }
+    }
     
     // Redirect back to my blogs page
     header("Location: my-blogs-page.php");

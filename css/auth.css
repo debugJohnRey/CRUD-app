@@ -135,3 +135,30 @@ p:last-child a {
   gap: 10px; 
 }
 
+.password-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px; /* Match the input's margin-bottom */
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* Make room for the icon */
+  box-sizing: border-box;
+  margin-bottom: 0; /* Remove the input's margin-bottom since container has it */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 52%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  z-index: 10;
+}
+
+.password-toggle:hover {
+  color: #333;
+}
+

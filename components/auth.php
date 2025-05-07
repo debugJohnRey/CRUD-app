@@ -26,7 +26,10 @@ function renderAuth($link, $type, $question, $direction = "", $greeting = "", $i
                     <p>Email</p>
                     <input type='email' name='email' required>
                     <p>Password</p>
-                    <input type='password' name='password' id='password' maxlength='12' required>
+                    <div class='password-container'>
+                        <input type='password' name='password' id='password' maxlength='12' required>
+                        <i class='fas fa-eye-slash password-toggle' id='passwordToggle'></i>
+                    </div>
                     <button type='submit'>Sign {$direction}</button>
                     <p>{$question}<a href='{$link}'>Sign {$type}</a></p>
                 </form>

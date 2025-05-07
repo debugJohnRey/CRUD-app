@@ -90,11 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // Add this code at the end of the DOMContentLoaded event listener
+    if (removeThumbnailButton) {
+      removeThumbnailButton.addEventListener("click", () => {
+        thumbnail.src = "assets/thumbnail.png";
+        thumbnail.style.display = "block";
+        document.getElementById("useDefaultThumbnail").value = "1";
+        addThumbnailButton.textContent = "Change Thumbnail";
+      });
+    }
+    // Replace the existing removeThumbnailButton event listener with this:
     removeThumbnailButton.addEventListener("click", () => {
       thumbnail.src = "";
       thumbnail.style.display = "none";
       removeThumbnailButton.style.display = "none";
       fileInput.value = "";
+      document.getElementById("useDefaultThumbnail").value = "0";
       addThumbnailButton.textContent = "Add Thumbnail";
     });
   }

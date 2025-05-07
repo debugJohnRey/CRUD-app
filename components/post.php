@@ -11,6 +11,7 @@ function renderCreatePost() {
             <textarea id="autoResizeTextareaTitle" class="title-textarea" name="title" placeholder="Title"></textarea>
             <textarea id="autoResizeTextareaContent" class="content-textarea" name="content" placeholder="Tell your story..."></textarea>
             <input type="file" id="fileInput" name="thumbnail" accept="image/*" style="display: none;">
+            <input type="hidden" id="useDefaultThumbnail" name="use_default_thumbnail" value="0">
         </form>
     </div>  
 

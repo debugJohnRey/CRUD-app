@@ -23,6 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (move_uploaded_file($_FILES['thumbnail']['tmp_name'], $uploadFile)) {
             $thumbnail_url = $uploadFile;
         }
+    } else {
+        // Use default thumbnail only if no image was uploaded
+        $thumbnail_url = 'assets/thumbnail.png';
     }
 
     try {
