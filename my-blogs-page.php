@@ -7,7 +7,8 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'conn/db.php'; 
 include 'conn/fetch_blog.php';
-$blogs = fetchBlogs();
+// Use the new function to fetch only the current user's blogs
+$blogs = fetchUserBlogs($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
