@@ -92,7 +92,8 @@ CREATE INDEX idx_blog_user_id ON blogs(user_id);
 ### Database Optimization
 - **Indexes**: Strategic indexes on frequently queried columns
 - **Foreign Keys**: Proper relationships with cascading deletes
-- **Normalization**: Database is in Third Normal Form (3NF)
+- **Normalization**: Database is in Third Normal Form (3NF).The Blogz database schema achieves Third Normal Form (3NF) because each table contains only attributes that depend on its primary key and nothing else. Every non-key attribute in the Users table (first_name, email, password, profile_picture_url, created_at) depends solely on the user_id, while every attribute in the Blogs table depends exclusively on blog_id, with user_id properly serving as a foreign key to establish the relationship. This design eliminates transitive dependencies by ensuring no attribute depends on another non-key attribute, making the database efficient for updates, preventing anomalies, and maintaining data integrity.
+
 
 ## Security Features
 
