@@ -23,3 +23,17 @@ CREATE TABLE blogs (
 CREATE INDEX idx_user_email ON users(email);
 CREATE INDEX idx_blog_user_id ON blogs(user_id);
 
+CREATE TABLE comments (
+    comment_id INT AUTO_INCREMENT PRIMARY KEY,
+    blog_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (blog_id) REFERENCES blogs(blog_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_comment_blog_id ON comments(blog_id);
+CREATE INDEX idx_comment_user_id ON comments(user_id);
+
+
