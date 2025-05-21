@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 include 'conn/db.php';
+include 'conn/comments.php';
 
 // Get the blog ID from the URL
 $blog_id = isset($_GET['id']) ? $_GET['id'] : null;
@@ -30,6 +31,9 @@ try {
         header("Location: dashboard.php");
         exit();
     }
+
+    // Fetch comments for this blog
+    $comments = fetchComments($blog_id);
 } catch (PDOException $e) {
     die("Could not fetch blog details: " . $e->getMessage());
 }
@@ -37,6 +41,7 @@ try {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,15 +55,17 @@ try {
     <link rel="stylesheet" href="css/styles.css">
     <title><?php echo htmlspecialchars($blog['title']); ?></title>
 </head>
-<body>
-    <?php 
+
+<body> <?php
         include 'components/navbar.php';
         include 'components/blog-detail.php';
-        
+        include 'components/comments.php';
+
         echo renderNavbar("Create Post", "fa-regular fa-pen-to-square", false);
         echo renderBlogDetail($blog);
-    ?>
-
-    <script src="js/scripts.js"></script>
+        echo renderComments($comments, $blog_id, $_SESSION['user_id']);
+        ?> <script src="js/scripts.js"></script>
+    <script src="js/comments.js"></script>
 </body>
+
 </html>
